@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
+import b_logo from './b_logo.png'
 import './App.css';
+import Desktop from './Desktop.js';
+import HashLoader from "react-spinners/HashLoader";
 
 function App() {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true)
+    setTimeout(()=> {
+      setLoading(false)
+    }, 6000)
+  },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        loading ?
+        <div className="loading_screen">
+          <img src={b_logo}  alt="b_logo" className="b_logo" />
+          <HashLoader
+          color={"#be29ec"} 
+          loading={loading} 
+          size={30} 
+          />
+
+        </div>
+
+        :
+
+        <div className="post-load">
+          <Desktop/>
+        </div>
+
+      }
+     
     </div>
   );
 }
